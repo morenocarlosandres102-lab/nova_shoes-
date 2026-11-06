@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Contacto | Nova Shoes{% endblock %}
+
+{% block content %}
+
+<section class="seccion-pagina">
+
+    <h1>Contáctanos</h1>
+    <p>Estamos aquí para ayudarte. Escríbenos tus dudas o consultas.</p>
+
+    <div class="formulario-contenedor">
+
+        <form method="POST" action="{{ url_for('contacto') }}">
+
+            <label>Nombre</label>
+            <input type="text" name="nombre" required>
+
+            <label>Correo electrónico</label>
+            <input type="email" name="correo" required>
+
+            <label>Asunto</label>
+            <input type="text" name="asunto" required>
+
+            <label>Mensaje</label>
+            <textarea name="mensaje" rows="5" required></textarea>
+
+            <button type="submit">Enviar mensaje</button>
+
+        </form>
+
+    </div>
+
+    <div class="informacion-contacto">
+        <h2>Nova Shoes</h2>
+        <p><i class="fa-solid fa-envelope"></i> Atención al cliente</p>
+        <p><i class="fa-solid fa-location-dot"></i> Colombia</p>
+    </div>
+
+</section>
+
+{% endblock %}

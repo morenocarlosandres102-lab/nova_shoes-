@@ -1,0 +1,631 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nova Shoes | Camina con estilo</title>
+
+    <meta name="description" content="Encuentra tus zapatos ideales en Nova Shoes. Descubre tenis para hombre, mujer y niño.">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/estilos.css') }}">
+
+</head>
+
+<body>
+
+    <!-- =========================================
+         ENCABEZADO Y NAVEGACIÓN
+    ========================================== -->
+
+    <header class="header">
+
+        <div class="header-contenido">
+
+            <!-- LOGO -->
+            <div class="logo">
+                <a href="{{ url_for('inicio') }}">
+                    Nova_Shoes
+                </a>
+            </div>
+
+            <!-- MENÚ PRINCIPAL -->
+            <nav class="menu">
+
+                <a href="{{ url_for('inicio') }}">
+                    Inicio
+                </a>
+
+                <a href="{{ url_for('hombre') }}">
+                    Hombre
+                </a>
+
+                <a href="{{ url_for('mujer') }}">
+                    Mujer
+                </a>
+
+                <a href="{{ url_for('nino') }}">
+                    Niño
+                </a>
+
+                <a href="{{ url_for('marcas') }}">
+                    Marcas
+                </a>
+
+                <a href="{{ url_for('login_admin') }}" class="btn-admin">
+                    <i class="fas fa-user-shield"></i> Administrador
+                 </a>
+
+            </nav>
+
+            <!-- ACCIONES -->
+            <div class="acciones">
+
+                <button
+                    type="button"
+                    class="boton-buscar"
+                    aria-label="Buscar productos"
+                    onclick="document.getElementById('productos').scrollIntoView({behavior: 'smooth'})">
+                    🔍
+                </button>
+
+                <a
+                    href="{{ url_for('login') }}"
+                    class="boton-usuario"
+                    aria-label="Iniciar sesión">
+                    👤
+                </a>
+
+                <a
+                    href="{{ url_for('carrito') }}"
+                    class="boton-carrito"
+                    aria-label="Ver carrito">
+
+                    🛒
+
+                    <span class="contador-carrito" id="contador-carrito">
+                        0
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         CONTENIDO PRINCIPAL
+    ========================================== -->
+
+    <main>
+
+        <!-- =====================================
+             BANNER PRINCIPAL
+        ====================================== -->
+
+        <section class="hero">
+
+            <div class="hero-contenido">
+
+                <p class="hero-subtitulo">
+                    NUEVA COLECCIÓN
+                </p>
+
+                <h1>
+                    Camina con estilo<br>
+                    y pisa con confianza
+                </h1>
+
+                <p>
+                    Descubre nuestra colección de tenis
+                    para todos los estilos.
+                </p>
+
+                <a href="#productos" class="boton-principal">
+                    Comprar ahora
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             CATEGORÍAS
+        ====================================== -->
+
+        <section class="categorias" id="categorias">
+
+            <div class="contenedor">
+
+                <div class="seccion-titulo">
+
+                    <p>CATEGORÍAS</p>
+
+                    <h2>Compra por categoría</h2>
+
+                </div>
+
+                <div class="categorias-contenedor">
+
+                    <!-- HOMBRE -->
+                    <a
+                        href="{{ url_for('hombre') }}"
+                        class="categoria-card">
+
+                        <div class="categoria-imagen">
+
+                            <img
+                                src="{{ url_for('static', filename='img/hombre.png') }}"
+                                alt="Calzado para hombre"
+                                loading="lazy">
+
+                        </div>
+
+                        <h3>Hombre</h3>
+
+                        <span>Explorar colección</span>
+
+                    </a>
+
+
+                    <!-- MUJER -->
+                    <a
+                        href="{{ url_for('mujer') }}"
+                        class="categoria-card">
+
+                        <div class="categoria-imagen">
+
+                            <img
+                                src="{{ url_for('static', filename='img/mujer.png') }}"
+                                alt="Calzado para mujer"
+                                loading="lazy">
+
+                        </div>
+
+                        <h3>Mujer</h3>
+
+                        <span>Explorar colección</span>
+
+                    </a>
+
+
+                    <!-- NIÑO -->
+                    <a
+                        href="{{ url_for('nino') }}"
+                        class="categoria-card">
+
+                        <div class="categoria-imagen">
+
+                            <img
+                                src="{{ url_for('static', filename='img/niño.png') }}"
+                                alt="Calzado infantil"
+                                loading="lazy">
+
+                        </div>
+
+                        <h3>Niño</h3>
+
+                        <span>Explorar colección</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             PRODUCTOS DESTACADOS
+        ====================================== -->
+
+        <section class="productos" id="productos">
+
+            <div class="contenedor">
+
+                <div class="seccion-titulo">
+
+                    <p>NUESTRA COLECCIÓN</p>
+
+                    <h2>Productos destacados</h2>
+
+                    <p>
+                        Encuentra tus próximos zapatos favoritos.
+                    </p>
+
+                </div>
+
+
+                <!-- PRODUCTOS PROCEDENTES DE FLASK -->
+                <div class="productos-contenedor">
+
+                    {% if productos %}
+
+                        {% for producto in productos %}
+
+                            <article class="producto-card">
+
+                                <!-- IMAGEN -->
+                                <div class="producto-imagen">
+
+                                    {% if producto.imagen %}
+
+                                        <img
+                                            src="{{ url_for('static', filename='img/' + producto.imagen) }}"
+                                            alt="{{ producto.nombre }}"
+                                            loading="lazy"
+                                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+                                        <div
+                                            class="sin-imagen"
+                                            style="display: none;">
+                                            Imagen no disponible
+                                        </div>
+
+                                    {% else %}
+
+                                        <div class="sin-imagen">
+                                            Sin imagen
+                                        </div>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <!-- INFORMACIÓN -->
+                                <div class="producto-info">
+
+                                    <p class="producto-marca">
+                                        {{ producto.marca or 'Nova Shoes' }}
+                                    </p>
+
+                                    <h3>
+                                        {{ producto.nombre }}
+                                    </h3>
+
+                                    <p class="producto-descripcion">
+                                        {{ producto.descripcion or 'Diseño y comodidad para tu estilo.' }}
+                                    </p>
+
+                                    <p class="producto-precio">
+                                        ${{ "{:,.0f}".format(producto.precio | float).replace(",", ".") }}
+                                    </p>
+
+                                    <p class="producto-stock">
+
+                                        {% if producto.stock is defined %}
+
+                                            {% if producto.stock | int > 0 %}
+
+                                                Disponibles: {{ producto.stock }}
+
+                                            {% else %}
+
+                                                Agotado
+
+                                            {% endif %}
+
+                                        {% else %}
+
+                                            Consulta disponibilidad
+
+                                        {% endif %}
+
+                                    </p>
+
+
+                                    <!-- VER PRODUCTO -->
+                                    <a
+                                        class="boton-principal"
+                                        href="{{ url_for('producto', id_producto=producto.id_producto) }}">
+
+                                        Ver producto
+
+                                    </a>
+
+                                </div>
+
+                            </article>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <div class="sin-productos">
+
+                            <h3>No hay productos disponibles</h3>
+
+                            <p>
+                                Pronto encontrarás nuevos productos
+                                en nuestra tienda.
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             MARCAS
+        ====================================== -->
+
+        <section class="marcas" id="marcas">
+
+            <div class="contenedor">
+
+                <div class="seccion-titulo">
+
+                    <p>LAS MEJORES MARCAS</p>
+
+                    <h2>Encuentra tus marcas favoritas</h2>
+
+                </div>
+
+
+                <div class="marcas-contenedor">
+
+                    <a
+                        href="{{ url_for('marcas') }}"
+                        class="marca">
+
+                        <span class="marca-logo">NIKE</span>
+
+                        <span>Nike</span>
+
+                    </a>
+
+
+                    <a
+                        href="{{ url_for('marcas') }}"
+                        class="marca">
+
+                        <span class="marca-logo">adidas</span>
+
+                        <span>Adidas</span>
+
+                    </a>
+
+
+                    <a
+                        href="{{ url_for('marcas') }}"
+                        class="marca">
+
+                        <span class="marca-logo">NB</span>
+
+                        <span>New Balance</span>
+
+                    </a>
+
+
+                    <a
+                        href="{{ url_for('marcas') }}"
+                        class="marca">
+
+                        <span class="marca-logo">PUMA</span>
+
+                        <span>Puma</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             BANNER PROMOCIONAL
+        ====================================== -->
+
+        <section class="promocion">
+
+            <div class="promocion-contenido">
+
+                <p class="promocion-subtitulo">
+                    NOVA SHOES
+                </p>
+
+                <h2>
+                    Más que zapatos,<br>
+                    es tu estilo.
+                </h2>
+
+                <p>
+                    Encuentra el calzado que representa tu personalidad.
+                </p>
+
+                <a
+                    href="#productos"
+                    class="boton-principal">
+
+                    Explorar colección
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             ACCESOS RÁPIDOS
+        ====================================== -->
+
+        <section class="accesos-rapidos">
+
+            <div class="contenedor accesos-grid">
+
+                <a href="{{ url_for('registro') }}" class="acceso-card">
+
+                    <span class="acceso-icono">👤</span>
+
+                    <h3>Crea tu cuenta</h3>
+
+                    <p>Regístrate en Nova Shoes.</p>
+
+                </a>
+
+
+                <a href="{{ url_for('mi_cuenta') }}" class="acceso-card">
+
+                    <span class="acceso-icono">📋</span>
+
+                    <h3>Mi cuenta</h3>
+
+                    <p>Consulta tu información.</p>
+
+                </a>
+
+
+                <a href="{{ url_for('contacto') }}" class="acceso-card">
+
+                    <span class="acceso-icono">✉️</span>
+
+                    <h3>Contáctanos</h3>
+
+                    <p>Estamos para ayudarte.</p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         PIE DE PÁGINA
+    ========================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-contenedor">
+
+            <!-- INFORMACIÓN DE LA TIENDA -->
+            <div class="footer-columna">
+
+                <h3>NOVA SHOES</h3>
+
+                <p>
+                    Camina con estilo y pisa con confianza.
+                    Encuentra los zapatos ideales para ti.
+                </p>
+
+            </div>
+
+
+            <!-- NAVEGACIÓN -->
+            <div class="footer-columna">
+
+                <h4>Navegación</h4>
+
+                <a href="{{ url_for('inicio') }}">
+                    Inicio
+                </a>
+
+                <a href="#productos">
+                    Productos destacados
+                </a>
+
+                <a href="#categorias">
+                    Categorías
+                </a>
+
+                <a href="{{ url_for('marcas') }}">
+                    Marcas
+                </a>
+
+                <a href="{{ url_for('nosotros') }}">
+                    Nosotros
+                </a>
+
+            </div>
+
+
+            <!-- CATEGORÍAS -->
+            <div class="footer-columna">
+
+                <h4>Categorías</h4>
+
+                <a href="{{ url_for('hombre') }}">
+                    Hombre
+                </a>
+
+                <a href="{{ url_for('mujer') }}">
+                    Mujer
+                </a>
+
+                <a href="{{ url_for('nino') }}">
+                    Niño
+                </a>
+
+            </div>
+
+
+            <!-- ATENCIÓN AL CLIENTE -->
+            <div class="footer-columna">
+
+                <h4>Atención al cliente</h4>
+
+                <a href="{{ url_for('contacto') }}">
+                    Contacto
+                </a>
+
+                <a href="{{ url_for('login') }}">
+                    Iniciar sesión
+                </a>
+
+                <a href="{{ url_for('registro') }}">
+                    Crear cuenta
+                </a>
+
+                <a href="{{ url_for('carrito') }}">
+                    Mi carrito
+                </a>
+
+                <a href="{{ url_for('nosotros') }}">
+                    Sobre nosotros
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- COPYRIGHT -->
+        <div class="footer-inferior">
+
+            <p>
+                &copy; 2026 Nova Shoes.
+                Todos los derechos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

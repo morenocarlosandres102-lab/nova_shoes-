@@ -1,0 +1,82 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Agregar producto | Nova Shoes{% endblock %}
+{% block page_heading %}Agregar producto{% endblock %}
+
+{% block content %}
+
+<div class="content-card form-card">
+
+    <h2>Registrar nuevo producto</h2>
+    <p>Completa los datos del nuevo calzado.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Nombre del producto</label>
+                <input type="text" name="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label>Precio</label>
+                <input type="number" name="precio" min="0" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label>Stock inicial</label>
+                <input type="number" name="stock" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label>Categoría</label>
+                <select name="id_categoria" required>
+                    <option value="">Seleccionar categoría</option>
+                    {% for categoria in categorias %}
+                    <option value="{{ categoria.id_categoria }}">
+                        {{ categoria.nombre }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Marca</label>
+                <select name="id_marca" required>
+                    <option value="">Seleccionar marca</option>
+                    {% for marca in marcas %}
+                    <option value="{{ marca.id_marca }}">
+                        {{ marca.nombre }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Imagen del producto</label>
+                <input type="file" name="imagen" accept="image/*">
+            </div>
+
+            <div class="form-group full-width">
+                <label>Descripción</label>
+                <textarea name="descripcion" rows="5"></textarea>
+            </div>
+
+        </div>
+
+        <div class="form-buttons">
+            <button type="submit" class="btn-primary">
+                Guardar producto
+            </button>
+
+            <a href="{{ url_for('admin_productos') }}" class="btn-secondary">
+                Cancelar
+            </a>
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

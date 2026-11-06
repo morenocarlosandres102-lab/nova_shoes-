@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Mi carrito | Nova Shoes{% endblock %}
+
+{% block content %}
+
+<section class="seccion-pagina">
+    <h1>Mi carrito de compras</h1>
+    <p>Revisa los productos que has seleccionado.</p>
+
+    {% if carrito %}
+    <div class="productos-carrito">
+
+        {% for item in carrito %}
+        <div class="producto-carrito">
+
+            <img src="{{ url_for('static', filename='img/' ~ item.imagen) }}"
+                 alt="{{ item.nombre }}">
+
+            <div>
+                <h3>{{ item.nombre }}</h3>
+                <p>Precio: ${{ item.precio }}</p>
+                <p>Cantidad: {{ item.cantidad }}</p>
+                <p>Subtotal: ${{ item.precio * item.cantidad }}</p>
+            </div>
+
+            <form action="{{ url_for('eliminar_carrito', id_producto=item.id_producto) }}"
+                  method="POST">
+                <button type="submit">Eliminar</button>
+            </form>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <h2>Total: ${{ total }}</h2>
+
+    <a href="{{ url_for('checkout') }}">Continuar compra</a>
+
+    {% else %}
+        <h2>Tu carrito está vacío</h2>
+        <p>¡Descubre nuestros productos!</p>
+        <a href="{{ url_for('inicio') }}">Explorar productos</a>
+    {% endif %}
+
+</section>
+
+{% endblock %}

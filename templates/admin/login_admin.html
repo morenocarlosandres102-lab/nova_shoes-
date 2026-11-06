@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso administrativo | Nova Shoes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+
+    <main class="login-container">
+
+        <div class="login-card">
+
+            <div class="login-logo">👟</div>
+
+            <h1>Nova Shoes</h1>
+            <p class="subtitle">Panel administrativo</p>
+
+            {% with mensajes = get_flashed_messages() %}
+                {% if mensajes %}
+                    {% for mensaje in mensajes %}
+                        <div class="mensaje">{{ mensaje }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% if error %}
+                <div class="mensaje">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST">
+
+                <label for="correo">Correo electrónico</label>
+                <input
+                    type="email"
+                    id="correo"
+                    name="correo"
+                    placeholder="admin@novashoes.com"
+                    required
+                >
+
+                <label for="password">Contraseña</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Ingresa tu contraseña"
+                    required
+                >
+
+                <button type="submit">Ingresar al panel</button>
+
+            </form>
+
+            <a href="{{ url_for('inicio') }}">Volver a la tienda</a>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

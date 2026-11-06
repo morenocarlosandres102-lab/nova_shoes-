@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+
+{% block titulo %}Marcas | Nova Shoes{% endblock %}
+
+{% block estilos %}
+<style>
+.marcas-pagina { padding: 70px 6%; text-align: center; }
+.marcas-pagina h1 { font-size: 36px; margin-bottom: 12px; }
+.marcas-pagina > p { color: #666; margin-bottom: 40px; }
+.marcas-grid { max-width: 1000px; margin: auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.marca-card { padding: 45px 15px; border: 1px solid #e5e5e5; background: #fafafa; transition: .2s; }
+.marca-card:hover { color: #1557b0; border-color: #1557b0; transform: translateY(-4px); }
+.marca-card h2 { font-size: 22px; }
+.marca-card p { margin-top: 12px; font-size: 13px; color: #666; }
+@media(max-width:700px) { .marcas-grid { grid-template-columns: repeat(2,1fr); } }
+</style>
+{% endblock %}
+
+{% block contenido %}
+<section class="marcas-pagina">
+    <h1>Nuestras marcas</h1>
+    <p>Descubre las marcas disponibles en Nova Shoes.</p>
+
+    <div class="marcas-grid">
+        <a class="marca-card" href="{{ url_for('inicio') }}"><h2>Nike</h2><p>Ver catálogo</p></a>
+        <a class="marca-card" href="{{ url_for('inicio') }}"><h2>Adidas</h2><p>Ver catálogo</p></a>
+        <a class="marca-card" href="{{ url_for('inicio') }}"><h2>New Balance</h2><p>Ver catálogo</p></a>
+        <a class="marca-card" href="{{ url_for('inicio') }}"><h2>Puma</h2><p>Ver catálogo</p></a>
+    </div>
+</section>
+{% endblock %}

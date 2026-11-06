@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Nosotros | Nova Shoes{% endblock %}
+
+{% block content %}
+
+<section class="seccion-pagina">
+
+    <div class="nosotros-contenido">
+
+        <h1>Sobre Nova Shoes</h1>
+
+        <h2>Camina con estilo y pisa con confianza</h2>
+
+        <p>
+            En Nova Shoes creemos que cada paso representa una oportunidad
+            para expresar tu personalidad y estilo.
+        </p>
+
+        <p>
+            Somos una tienda dedicada a ofrecer diferentes opciones de
+            calzado para hombres, mujeres y niños, buscando combinar
+            comodidad, calidad y diseño.
+        </p>
+
+        <h2>Nuestra misión</h2>
+
+        <p>
+            Ofrecer calzado que combine estilo, comodidad y calidad,
+            brindando una experiencia de compra sencilla y agradable.
+        </p>
+
+        <h2>Nuestra visión</h2>
+
+        <p>
+            Ser una tienda reconocida por su variedad de productos,
+            atención al cliente y compromiso con la satisfacción
+            de nuestros compradores.
+        </p>
+
+        <a href="{{ url_for('inicio') }}">Conoce nuestros productos</a>
+
+    </div>
+
+</section>
+
+{% endblock %}

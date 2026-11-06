@@ -1,0 +1,84 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Editar producto | Nova Shoes{% endblock %}
+{% block page_heading %}Editar producto{% endblock %}
+
+{% block content %}
+
+<div class="content-card form-card">
+
+    <h2>Modificar producto</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" name="nombre"
+                       value="{{ producto.nombre }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Precio</label>
+                <input type="number" name="precio"
+                       value="{{ producto.precio }}" min="0" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label>Stock</label>
+                <input type="number" name="stock"
+                       value="{{ producto.stock }}" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label>Categoría</label>
+                <select name="id_categoria" required>
+                    {% for categoria in categorias %}
+                    <option value="{{ categoria.id_categoria }}"
+                        {% if categoria.id_categoria == producto.id_categoria %}selected{% endif %}>
+                        {{ categoria.nombre }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Marca</label>
+                <select name="id_marca" required>
+                    {% for marca in marcas %}
+                    <option value="{{ marca.id_marca }}"
+                        {% if marca.id_marca == producto.id_marca %}selected{% endif %}>
+                        {{ marca.nombre }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Cambiar imagen</label>
+                <input type="file" name="imagen" accept="image/*">
+            </div>
+
+            <div class="form-group full-width">
+                <label>Descripción</label>
+                <textarea name="descripcion" rows="5">{{ producto.descripcion or '' }}</textarea>
+            </div>
+
+        </div>
+
+        <div class="form-buttons">
+            <button type="submit" class="btn-primary">
+                Actualizar producto
+            </button>
+
+            <a href="{{ url_for('admin_productos') }}" class="btn-secondary">
+                Cancelar
+            </a>
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

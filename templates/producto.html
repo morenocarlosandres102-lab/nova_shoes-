@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}{{ producto.nombre }} | Nova Shoes{% endblock %}
+
+{% block content %}
+
+<section class="seccion-pagina">
+
+    <div class="detalle-producto">
+
+        <div class="imagen-producto">
+            <img src="{{ url_for('static', filename='img/' ~ producto.imagen) }}"
+                 alt="{{ producto.nombre }}">
+        </div>
+
+        <div class="informacion-producto">
+
+            <h1>{{ producto.nombre }}</h1>
+
+            <p>{{ producto.descripcion }}</p>
+
+            <h2>${{ producto.precio }}</h2>
+
+            <p><strong>Categoría:</strong> {{ producto.categoria }}</p>
+
+            <p><strong>Marca:</strong> {{ producto.marca }}</p>
+
+            <p><strong>Disponibles:</strong> {{ producto.stock }}</p>
+
+            {% if producto.stock > 0 %}
+
+            <form method="POST"
+                  action="{{ url_for('agregar_carrito', id_producto=producto.id_producto) }}">
+
+                <label>Cantidad</label>
+
+                <input type="number" name="cantidad"
+                       min="1" max="{{ producto.stock }}"
+                       value="1" required>
+
+                <button type="submit">
+                    Agregar al carrito
+                </button>
+
+            </form>
+
+            {% else %}
+
+            <p>Producto agotado.</p>
+
+            {% endif %}
+
+            <a href="{{ url_for('inicio') }}">Volver a la tienda</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

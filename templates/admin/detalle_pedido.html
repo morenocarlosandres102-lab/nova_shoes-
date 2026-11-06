@@ -1,0 +1,70 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Detalle del pedido | Nova Shoes{% endblock %}
+{% block page_heading %}Detalle del pedido{% endblock %}
+
+{% block content %}
+
+<div class="content-card">
+
+    <h2>Pedido #{{ pedido.id_pedido }}</h2>
+
+    <div class="order-info">
+        <p><strong>Cliente:</strong> {{ pedido.nombre }}</p>
+        <p><strong>Correo:</strong> {{ pedido.correo }}</p>
+        <p><strong>Fecha:</strong> {{ pedido.fecha }}</p>
+        <p><strong>Total:</strong> ${{ "{:,.0f}".format(pedido.total) }}</p>
+        <p><strong>Estado actual:</strong> {{ pedido.estado }}</p>
+    </div>
+
+    <h3>Productos del pedido</h3>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for detalle in detalles %}
+                <tr>
+                    <td>{{ detalle.nombre }}</td>
+                    <td>{{ detalle.cantidad }}</td>
+                    <td>${{ "{:,.0f}".format(detalle.precio) }}</td>
+                    <td>${{ "{:,.0f}".format(detalle.precio * detalle.cantidad) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <form method="POST" class="inline-form">
+
+        <label>Actualizar estado:</label>
+
+        <select name="estado" required>
+            <option value="pendiente" {% if pedido.estado == 'pendiente' %}selected{% endif %}>Pendiente</option>
+            <option value="procesando" {% if pedido.estado == 'procesando' %}selected{% endif %}>Procesando</option>
+            <option value="enviado" {% if pedido.estado == 'enviado' %}selected{% endif %}>Enviado</option>
+            <option value="completado" {% if pedido.estado == 'completado' %}selected{% endif %}>Completado</option>
+            <option value="cancelado" {% if pedido.estado == 'cancelado' %}selected{% endif %}>Cancelado</option>
+        </select>
+
+        <button type="submit" class="btn-primary">
+            Actualizar estado
+        </button>
+
+    </form>
+
+    <a href="{{ url_for('admin_pedidos') }}" class="btn-secondary">
+        Volver a pedidos
+    </a>
+
+</div>
+
+{% endblock %}

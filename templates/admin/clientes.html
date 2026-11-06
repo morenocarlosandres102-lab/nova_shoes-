@@ -1,0 +1,52 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Clientes | Nova Shoes{% endblock %}
+{% block page_heading %}Gestión de clientes{% endblock %}
+
+{% block content %}
+
+<div class="content-card">
+
+    <h2>Clientes registrados</h2>
+
+    <form method="GET" class="search-form">
+        <input type="text" name="buscar"
+               placeholder="Buscar por nombre o correo..."
+               value="{{ buscar or '' }}">
+
+        <button type="submit" class="btn-primary">
+            Buscar
+        </button>
+    </form>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo electrónico</th>
+                    <th>Rol</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.id_usuario }}</td>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.correo }}</td>
+                    <td>{{ cliente.rol }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">No hay clientes registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

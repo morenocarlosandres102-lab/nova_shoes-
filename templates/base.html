@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Nova Shoes{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/estilos.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- ENCABEZADO -->
+    <header class="header">
+
+        <div class="contenedor-header">
+
+            <a href="{{ url_for('inicio') }}" class="logo">
+                NOVA <span>SHOES</span>
+            </a>
+
+            <!-- MENÚ DE NAVEGACIÓN -->
+            <nav class="menu">
+
+                <a href="{{ url_for('inicio') }}">Inicio</a>
+
+                <a href="{{ url_for('hombre') }}">Hombre</a>
+
+                <a href="{{ url_for('mujer') }}">Mujer</a>
+
+                <a href="{{ url_for('nino') }}">Niño</a>
+
+                <a href="{{ url_for('marcas') }}">Marcas</a>
+
+            </nav>
+
+            <!-- ACCIONES -->
+            <div class="acciones-header">
+
+                <button class="icono-header" aria-label="Buscar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+
+                <a href="#" class="icono-header" aria-label="Mi cuenta">
+                    <i class="fa-regular fa-user"></i>
+                </a>
+
+                <a href="#" class="icono-header" aria-label="Carrito">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENIDO DE CADA PÁGINA -->
+    <main>
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer">
+
+        <div class="footer-contenido">
+
+            <div class="footer-logo">
+                NOVA <span>SHOES</span>
+                <p>Camina con estilo y pisa con confianza.</p>
+            </div>
+
+            <div class="footer-enlaces">
+                <h3>Explora</h3>
+                <a href="{{ url_for('inicio') }}">Inicio</a>
+                <a href="{{ url_for('hombre') }}">Hombre</a>
+                <a href="{{ url_for('mujer') }}">Mujer</a>
+                <a href="{{ url_for('nino') }}">Niño</a>
+                <a href="{{ url_for('marcas') }}">Marcas</a>
+            </div>
+
+            <div class="footer-enlaces">
+                <h3>Contacto</h3>
+                <p>Atención al cliente</p>
+                <p>Nova Shoes</p>
+            </div>
+
+        </div>
+
+        <div class="footer-final">
+            <p>&copy; 2026 Nova Shoes. Todos los derechos reservados.</p>
+        </div>
+
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Categorías | Nova Shoes{% endblock %}
+{% block page_heading %}Categorías{% endblock %}
+
+{% block content %}
+
+<div class="content-card">
+
+    <h2>Administrar categorías</h2>
+
+    <form method="POST" class="inline-form">
+        <input type="text" name="nombre"
+               placeholder="Nombre de la categoría" required>
+
+        <button type="submit" class="btn-primary">
+            <i class="fas fa-plus"></i> Agregar
+        </button>
+    </form>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for categoria in categorias %}
+                <tr>
+                    <td>{{ categoria.id_categoria }}</td>
+                    <td>{{ categoria.nombre }}</td>
+                    <td class="action-buttons">
+
+                        <form method="POST"
+                              action="{{ url_for('admin_eliminar_categoria', id_categoria=categoria.id_categoria) }}"
+                              onsubmit="return confirm('¿Eliminar esta categoría?')">
+
+                            <button type="submit" class="btn-delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">No hay categorías registradas.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

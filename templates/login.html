@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar sesión | Nova Shoes{% endblock %}
+
+{% block content %}
+
+<section class="seccion-pagina">
+
+    <div class="formulario-contenedor">
+
+        <h1>Bienvenido a Nova Shoes</h1>
+        <p>Ingresa a tu cuenta para continuar.</p>
+
+        {% if error %}
+            <p class="mensaje-error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('login') }}">
+
+            <label>Correo electrónico</label>
+            <input type="email" name="correo"
+                   placeholder="Ingresa tu correo" required>
+
+            <label>Contraseña</label>
+            <input type="password" name="password"
+                   placeholder="Ingresa tu contraseña" required>
+
+            <button type="submit">Iniciar sesión</button>
+
+        </form>
+
+        <p>¿No tienes una cuenta?</p>
+        <a href="{{ url_for('registro') }}">Crear una cuenta</a>
+
+    </div>
+
+</section>
+
+{% endblock %}

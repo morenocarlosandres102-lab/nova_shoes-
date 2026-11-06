@@ -1,0 +1,57 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Reportes | Nova Shoes{% endblock %}
+{% block page_heading %}Reportes y estadísticas{% endblock %}
+
+{% block content %}
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <div class="stat-icon blue">
+            <i class="fas fa-box"></i>
+        </div>
+        <div>
+            <p>Productos</p>
+            <h2>{{ total_productos }}</h2>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon green">
+            <i class="fas fa-users"></i>
+        </div>
+        <div>
+            <p>Clientes</p>
+            <h2>{{ total_clientes }}</h2>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon orange">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+        <div>
+            <p>Pedidos</p>
+            <h2>{{ total_pedidos }}</h2>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon purple">
+            <i class="fas fa-dollar-sign"></i>
+        </div>
+        <div>
+            <p>Total registrado</p>
+            <h2>${{ "{:,.0f}".format(total_registrado or 0) }}</h2>
+        </div>
+    </div>
+
+</div>
+
+<div class="content-card">
+    <h2>Resumen de la tienda</h2>
+    <p>Estos indicadores corresponden a los datos registrados en la base de datos.</p>
+</div>
+
+{% endblock %}

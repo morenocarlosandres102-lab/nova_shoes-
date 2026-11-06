@@ -1,0 +1,150 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Dashboard | Nova Shoes{% endblock %}
+{% block page_heading %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="welcome-banner">
+    <div>
+        <h1>¡Bienvenido a Nova Shoes!</h1>
+        <p>Administra tu tienda desde un solo lugar.</p>
+    </div>
+
+    <i class="fas fa-store"></i>
+</div>
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <div class="stat-icon blue">
+            <i class="fas fa-box"></i>
+        </div>
+        <div>
+            <p>Total productos</p>
+            <h2>{{ total_productos }}</h2>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon green">
+            <i class="fas fa-users"></i>
+        </div>
+        <div>
+            <p>Clientes registrados</p>
+            <h2>{{ total_clientes }}</h2>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon orange">
+            <i class="fas fa-shopping-bag"></i>
+        </div>
+        <div>
+            <p>Total pedidos</p>
+            <h2>{{ total_pedidos }}</h2>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon purple">
+            <i class="fas fa-dollar-sign"></i>
+        </div>
+        <div>
+            <p>Importe registrado en pedidos</p>
+            <h2>${{ "{:,.0f}".format(total_registrado or 0) }}</h2>
+        </div>
+    </div>
+
+</div>
+
+<div class="content-card">
+
+    <div class="card-header">
+        <h3>Pedidos recientes</h3>
+        <a href="{{ url_for('admin_pedidos') }}">Ver todos</a>
+    </div>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Pedido</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for pedido in pedidos_recientes %}
+                <tr>
+                    <td>#{{ pedido.id_pedido }}</td>
+                    <td>{{ pedido.nombre }}</td>
+                    <td>{{ pedido.fecha }}</td>
+                    <td>${{ "{:,.0f}".format(pedido.total) }}</td>
+                    <td>
+                        <span class="status status-{{ pedido.estado|lower }}">
+                            {{ pedido.estado }}
+                        </span>
+                    </td>
+                    <td>
+                        <a class="table-action"
+                           href="{{ url_for('admin_detalle_pedido', id_pedido=pedido.id_pedido) }}">
+                            Ver
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6">Todavía no hay pedidos registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div class="content-card">
+
+    <div class="card-header">
+        <h3>Productos con poco inventario</h3>
+        <a href="{{ url_for('admin_inventario') }}">Ver inventario</a>
+    </div>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Existencias</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for producto in productos_bajo_stock %}
+                <tr>
+                    <td>{{ producto.nombre }}</td>
+                    <td>${{ "{:,.0f}".format(producto.precio) }}</td>
+                    <td>
+                        <span class="stock-warning">
+                            {{ producto.stock }} unidades
+                        </span>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">No hay productos con stock bajo.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}
