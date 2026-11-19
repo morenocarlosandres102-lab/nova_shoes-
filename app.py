@@ -43,14 +43,18 @@ app.config["SESSION_COOKIE_SECURE"] = (
 # ==========================================
 
 def conectar_db():
-    """Establece y devuelve una conexión con la base de datos MySQL."""
+    """Conecta con la base de datos MySQL de Enzonic usando SSL."""
+
     return mysql.connector.connect(
-        host=os.environ.get("DB_HOST", "localhost"),
-        user=os.environ.get("DB_USER", "root"),
-        password=os.environ.get("DB_PASSWORD", "0811"),
-        database=os.environ.get("DB_NAME", "nova_shoes"),
+        host=os.environ.get("DB_HOST"),
         port=int(os.environ.get("DB_PORT", "3306")),
-        connection_timeout=10
+        user=os.environ.get("DB_USER"),
+        password=os.environ.get("DB_PASSWORD"),
+        database=os.environ.get("DB_NAME"),
+
+        connection_timeout=30,
+
+        ssl_disabled=False
     )
 
 # ==========================================
