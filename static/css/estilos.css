@@ -1047,3 +1047,1007 @@ RESPONSIVE CELULAR
         align-items: flex-start;
     }
 }
+
+/* =====================================================
+   NOVA SHOES - DISEÑO MODERNO
+   Estilo deportivo, elegante y profesional
+===================================================== */
+
+/* VARIABLES */
+:root {
+    --azul: #2563eb;
+    --azul-oscuro: #14213d;
+    --azul-claro: #eaf1ff;
+    --celeste: #38bdf8;
+    --negro: #111827;
+    --gris: #64748b;
+    --fondo: #f5f7fb;
+    --blanco: #ffffff;
+    --borde: #e5eaf2;
+    --sombra: 0 10px 30px rgba(15, 23, 42, 0.07);
+    --transicion: all .3s ease;
+}
+
+/* CONFIGURACIÓN GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--fondo);
+    color: var(--negro);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 1300px;
+    margin: auto;
+}
+
+/* =====================================================
+   ENCABEZADO
+===================================================== */
+
+.header {
+    width: 100%;
+    min-height: 82px;
+    padding: 0 5%;
+    background: rgba(255, 255, 255, .96);
+    border-bottom: 1px solid var(--borde);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .04);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+}
+
+.header-contenido {
+    max-width: 1450px;
+    min-height: 82px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+/* LOGO */
+.logo a {
+    color: var(--azul-oscuro);
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.logo a:hover {
+    color: var(--azul);
+}
+
+/* MENÚ */
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.menu a {
+    position: relative;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 650;
+    transition: var(--transicion);
+}
+
+.menu a:not(.btn-admin)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 0;
+    height: 3px;
+    border-radius: 5px;
+    background: var(--azul);
+    transition: var(--transicion);
+}
+
+.menu a:hover {
+    color: var(--azul);
+}
+
+.menu a:not(.btn-admin):hover::after {
+    width: 100%;
+}
+
+/* ADMINISTRADOR */
+.menu .btn-admin {
+    padding: 11px 17px;
+    color: white;
+    background: var(--azul-oscuro);
+    border-radius: 9px;
+    transition: var(--transicion);
+}
+
+.menu .btn-admin:hover {
+    color: white;
+    background: var(--azul);
+    transform: translateY(-2px);
+}
+
+/* ICONOS */
+.acciones {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.acciones button,
+.acciones > a {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--borde);
+    border-radius: 50%;
+    background: white;
+    font-size: 17px;
+    transition: var(--transicion);
+}
+
+.acciones button:hover,
+.acciones > a:hover {
+    color: white;
+    background: var(--azul);
+    border-color: var(--azul);
+    transform: translateY(-3px);
+}
+
+.boton-carrito {
+    position: relative;
+}
+
+.contador-carrito {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 19px;
+    height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ef4444;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* =====================================================
+   BANNER PRINCIPAL
+===================================================== */
+
+.hero {
+    min-height: 590px;
+    padding: 90px 8%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(10, 20, 40, .92),
+            rgba(10, 20, 40, .55),
+            rgba(10, 20, 40, .08)
+        ),
+        url("../img/hero-zapatillas.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-contenido {
+    max-width: 680px;
+    color: white;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-subtitulo {
+    display: inline-block;
+    margin-bottom: 22px;
+    padding: 9px 17px;
+    color: #bfdbfe;
+    background: rgba(37, 99, 235, .2);
+    border: 1px solid rgba(147, 197, 253, .4);
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.hero h1 {
+    margin-bottom: 22px;
+    font-size: clamp(42px, 5.5vw, 70px);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -2px;
+}
+
+.hero-contenido > p:not(.hero-subtitulo) {
+    max-width: 480px;
+    margin-bottom: 30px;
+    color: #dbeafe;
+    font-size: 17px;
+}
+
+/* BOTONES */
+.boton-principal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 28px;
+    color: white;
+    background: var(--azul);
+    border: 2px solid var(--azul);
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 750;
+    transition: var(--transicion);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, .25);
+}
+
+.boton-principal:hover {
+    color: var(--azul);
+    background: white;
+    border-color: white;
+    transform: translateY(-4px);
+}
+
+/* =====================================================
+   TÍTULOS DE SECCIONES
+===================================================== */
+
+.seccion-titulo {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.seccion-titulo > p:first-child {
+    color: var(--azul);
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 2.5px;
+}
+
+.seccion-titulo h2 {
+    margin: 8px 0;
+    color: var(--azul-oscuro);
+    font-size: clamp(27px, 3vw, 38px);
+    font-weight: 850;
+    letter-spacing: -1px;
+}
+
+.seccion-titulo p:last-child {
+    color: var(--gris);
+    font-size: 14px;
+}
+
+/* =====================================================
+   CATEGORÍAS
+===================================================== */
+
+.categorias {
+    padding: 90px 0;
+    background: white;
+}
+
+.categorias-contenedor {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.categoria-card {
+    display: block;
+    overflow: hidden;
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 17px;
+    box-shadow: var(--sombra);
+    transition: var(--transicion);
+    text-align: center;
+}
+
+.categoria-card:hover {
+    transform: translateY(-9px);
+    box-shadow: 0 18px 40px rgba(37, 99, 235, .13);
+}
+
+.categoria-imagen {
+    height: 300px;
+    overflow: hidden;
+    background: #edf2fa;
+}
+
+.categoria-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
+}
+
+.categoria-card:hover img {
+    transform: scale(1.08);
+}
+
+.categoria-card h3 {
+    margin: 19px 0 3px;
+    color: var(--azul-oscuro);
+    font-size: 23px;
+    font-weight: 850;
+}
+
+.categoria-card span {
+    display: inline-block;
+    margin-bottom: 22px;
+    color: var(--azul);
+    font-size: 13px;
+    font-weight: 750;
+}
+
+/* =====================================================
+   PRODUCTOS DESTACADOS
+===================================================== */
+
+.productos {
+    padding: 90px 0;
+    background: var(--fondo);
+}
+
+.productos-contenedor {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+}
+
+/* TARJETA */
+.producto-card {
+    overflow: hidden;
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(15, 23, 42, .04);
+    transition: var(--transicion);
+}
+
+.producto-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 17px 35px rgba(15, 23, 42, .10);
+}
+
+/* IMAGEN */
+.producto-imagen {
+    height: 235px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #f8fafc;
+}
+
+.producto-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform .4s ease;
+}
+
+.producto-card:hover .producto-imagen img {
+    transform: scale(1.09);
+}
+
+.sin-imagen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gris);
+    background: #e9eef6;
+    font-size: 13px;
+}
+
+/* INFORMACIÓN */
+.producto-info {
+    padding: 20px;
+}
+
+.producto-marca {
+    margin-bottom: 5px;
+    color: var(--azul);
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.producto-info h3 {
+    min-height: 45px;
+    margin-bottom: 8px;
+    color: var(--azul-oscuro);
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+.producto-descripcion {
+    min-height: 42px;
+    margin-bottom: 12px;
+    color: var(--gris);
+    font-size: 12px;
+}
+
+.producto-precio {
+    margin: 12px 0 5px;
+    color: var(--azul);
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.producto-stock {
+    margin-bottom: 15px;
+    color: #15803d;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.producto-info .boton-principal {
+    width: 100%;
+    padding: 12px;
+    font-size: 13px;
+}
+
+/* MENSAJES */
+.sin-productos {
+    grid-column: 1 / -1;
+    padding: 50px 20px;
+    background: white;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.sin-productos h3 {
+    color: var(--azul-oscuro);
+    margin-bottom: 10px;
+}
+
+.sin-productos p {
+    color: var(--gris);
+}
+
+/* =====================================================
+   MARCAS
+===================================================== */
+
+.marcas {
+    padding: 85px 0;
+    background: white;
+}
+
+.marcas-contenedor {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.marca {
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #f8fafc;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    transition: var(--transicion);
+}
+
+.marca:hover {
+    background: var(--azul-oscuro);
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: var(--sombra);
+}
+
+.marca-logo {
+    color: var(--azul);
+    font-size: 26px;
+    font-weight: 950;
+    letter-spacing: -1px;
+    transition: var(--transicion);
+}
+
+.marca:hover .marca-logo {
+    color: #93c5fd;
+}
+
+.marca > span:last-child {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* =====================================================
+   BANNER PROMOCIONAL
+===================================================== */
+
+.promocion {
+    padding: 100px 7%;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 85% 20%, rgba(56, 189, 248, .2), transparent 30%),
+        linear-gradient(120deg, #101c35, #1d4ed8);
+    color: white;
+    text-align: center;
+}
+
+.promocion-contenido {
+    position: relative;
+    z-index: 2;
+}
+
+.promocion-subtitulo {
+    margin-bottom: 15px;
+    color: #bfdbfe;
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 3px;
+}
+
+.promocion h2 {
+    margin-bottom: 17px;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 900;
+    line-height: 1.15;
+}
+
+.promocion-contenido > p:not(.promocion-subtitulo) {
+    margin-bottom: 28px;
+    color: #dbeafe;
+    font-size: 15px;
+}
+
+.promocion .boton-principal {
+    color: var(--azul-oscuro);
+    background: white;
+    border-color: white;
+}
+
+.promocion .boton-principal:hover {
+    color: white;
+    background: transparent;
+}
+
+/* =====================================================
+   ACCESOS RÁPIDOS
+===================================================== */
+
+.accesos-rapidos {
+    padding: 70px 0;
+    background: white;
+}
+
+.accesos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.acceso-card {
+    padding: 30px 20px;
+    background: #f8fafc;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    text-align: center;
+    transition: var(--transicion);
+}
+
+.acceso-card:hover {
+    background: var(--azul-oscuro);
+    color: white;
+    transform: translateY(-6px);
+}
+
+.acceso-icono {
+    display: inline-flex;
+    width: 55px;
+    height: 55px;
+    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
+    background: var(--azul-claro);
+    border-radius: 14px;
+    font-size: 25px;
+}
+
+.acceso-card h3 {
+    margin-bottom: 7px;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.acceso-card p {
+    color: var(--gris);
+    font-size: 13px;
+}
+
+.acceso-card:hover p {
+    color: #dbeafe;
+}
+
+/* =====================================================
+   PIE DE PÁGINA
+===================================================== */
+
+.footer {
+    padding: 65px 6% 0;
+    background: #101827;
+    color: white;
+}
+
+.footer-contenedor {
+    max-width: 1300px;
+    margin: auto;
+    padding-bottom: 45px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+}
+
+.footer-columna h3 {
+    margin-bottom: 17px;
+    color: #60a5fa;
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.footer-columna h4 {
+    margin-bottom: 18px;
+    color: white;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.footer-columna p {
+    max-width: 290px;
+    color: #aebbd0;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.footer-columna a {
+    display: block;
+    width: fit-content;
+    margin-bottom: 11px;
+    color: #aebbd0;
+    font-size: 13px;
+    transition: var(--transicion);
+}
+
+.footer-columna a:hover {
+    padding-left: 5px;
+    color: #60a5fa;
+}
+
+.footer-inferior {
+    padding: 22px 0;
+    border-top: 1px solid rgba(255,255,255,.12);
+    color: #94a3b8;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* =====================================================
+   RESPONSIVE - TABLET
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .header-contenido {
+        flex-wrap: wrap;
+        padding: 15px 0;
+    }
+
+    .menu {
+        gap: 16px;
+    }
+
+    .productos-contenedor {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .categoria-imagen {
+        height: 250px;
+    }
+}
+
+/* =====================================================
+   RESPONSIVE - CELULARES
+===================================================== */
+
+@media (max-width: 750px) {
+
+    .header {
+        padding: 0 5%;
+    }
+
+    .header-contenido {
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .logo a {
+        font-size: 24px;
+    }
+
+    .menu {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px 19px;
+    }
+
+    .menu a {
+        font-size: 12px;
+    }
+
+    .acciones {
+        justify-content: center;
+    }
+
+    .hero {
+        min-height: 490px;
+        padding: 65px 7%;
+        background-position: 60% center;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .categorias-contenedor {
+        grid-template-columns: 1fr;
+        max-width: 430px;
+        margin: auto;
+    }
+
+    .categoria-imagen {
+        height: 290px;
+    }
+
+    .productos-contenedor {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
+
+    .producto-imagen {
+        height: 175px;
+    }
+
+    .producto-info {
+        padding: 14px;
+    }
+
+    .producto-info h3 {
+        font-size: 14px;
+    }
+
+    .producto-precio {
+        font-size: 18px;
+    }
+
+    .marcas-contenedor {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .accesos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-contenedor {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .productos-contenedor {
+        grid-template-columns: 1fr;
+    }
+
+    .producto-imagen {
+        height: 240px;
+    }
+
+    .hero h1 {
+        font-size: 35px;
+    }
+
+    .footer-contenedor {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =====================================
+   ENCABEZADO PRINCIPAL - NOVA SHOES
+===================================== */
+
+.header {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    position: relative;
+    z-index: 1000;
+}
+
+.contenedor-header {
+    width: 90%;
+    max-width: 1250px;
+    min-height: 85px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+/* LOGO */
+.logo {
+    color: #172033;
+    font-size: 23px;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* MENÚ */
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    flex: 1;
+}
+
+.menu a {
+    color: #344258;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.menu a:hover {
+    color: #2563eb;
+}
+
+/* ICONOS */
+.acciones-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+    flex-shrink: 0;
+}
+
+.icono-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    color: #172033;
+    font-size: 19px;
+    text-decoration: none;
+
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.icono-header:hover {
+    color: #2563eb;
+}
+
+/* ADAPTACIÓN PARA CELULARES */
+@media (max-width: 768px) {
+    .contenedor-header {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 15px 0;
+        gap: 15px;
+    }
+
+    .logo {
+        width: 100%;
+        text-align: center;
+    }
+
+    .menu {
+        width: 100%;
+        flex: none;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+
+    .acciones-header {
+        width: 100%;
+        justify-content: center;
+    }
+}
+.saludo-usuario {
+    color: #1557b0;
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+    padding-left: 12px;
+}
+.boton-carrito {
+    position: relative;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.contador-carrito {
+    position: absolute;
+    top: -7px;
+    right: -9px;
+    background: #1557b0;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,63 +1,280 @@
-
 {% extends "base.html" %}
 
-{% block titulo %}Hombre | Nova Shoes{% endblock %}
+{% block title %}Hombre | Nova Shoes{% endblock %}
 
-{% block estilos %}
+{% block extra_css %}
 <style>
-.catalogo { padding: 60px 6%; background: #fafafa; min-height: 70vh; }
-.catalogo h1 { text-align: center; font-size: 36px; margin-bottom: 12px; }
-.intro { text-align: center; color: #666; margin-bottom: 35px; }
-.filtros { display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; flex-wrap: wrap; }
-.filtros a { padding: 10px 18px; border: 1px solid #e5e5e5; background: white; }
-.filtros a:hover { background: #1557b0; color: white; }
-.productos-contenedor { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
-.producto-card { background: white; border: 1px solid #e5e5e5; overflow: hidden; }
-.producto-imagen { height: 230px; background: #f4f4f4; }
-.producto-imagen img { width: 100%; height: 100%; object-fit: contain; }
-.producto-info { padding: 18px; }
-.producto-marca { color: #777; font-size: 12px; margin-bottom: 8px; }
-.producto-precio { font-size: 20px; font-weight: bold; margin: 12px 0; }
-.btn { display: block; text-align: center; background: #171717; color: white; padding: 12px; margin-top: 12px; }
-.btn:hover { background: #1557b0; }
-@media(max-width:800px) { .productos-contenedor { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media(max-width:480px) { .productos-contenedor { grid-template-columns: 1fr; } }
+    .catalogo {
+        min-height: 70vh;
+        padding: 65px 6% 90px;
+        background: #f5f7fb;
+    }
+
+    .catalogo-encabezado {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .catalogo-encabezado span {
+        color: #2563eb;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 2px;
+    }
+
+    .catalogo-encabezado h1 {
+        margin: 10px 0;
+        color: #14213d;
+        font-size: 38px;
+        font-weight: 900;
+    }
+
+    .catalogo-encabezado p {
+        color: #64748b;
+        font-size: 15px;
+    }
+
+    .filtros {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+    }
+
+    .filtros a {
+        padding: 11px 22px;
+        color: #334155;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: .3s;
+    }
+
+    .filtros a:hover,
+    .filtros a.activo {
+        color: white;
+        background: #2563eb;
+        border-color: #2563eb;
+    }
+
+    .productos-contenedor {
+        max-width: 1300px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 24px;
+    }
+
+    .producto-card {
+        overflow: hidden;
+        background: white;
+        border: 1px solid #e5eaf2;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(15, 23, 42, .04);
+        transition: .3s ease;
+    }
+
+    .producto-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 15px 35px rgba(15, 23, 42, .10);
+    }
+
+    .producto-imagen {
+        height: 235px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8fafc;
+    }
+
+    .producto-imagen img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: .4s;
+    }
+
+    .producto-card:hover .producto-imagen img {
+        transform: scale(1.07);
+    }
+
+    .producto-info {
+        padding: 20px;
+    }
+
+    .producto-marca {
+        margin-bottom: 7px;
+        color: #2563eb;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .producto-info h3 {
+        min-height: 44px;
+        margin-bottom: 8px;
+        color: #14213d;
+        font-size: 16px;
+        font-weight: 800;
+    }
+
+    .producto-descripcion {
+        min-height: 38px;
+        color: #64748b;
+        font-size: 12px;
+    }
+
+    .producto-precio {
+        margin: 13px 0 5px;
+        color: #2563eb;
+        font-size: 22px;
+        font-weight: 900;
+    }
+
+    .producto-stock {
+        margin-bottom: 15px;
+        color: #15803d;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .btn-producto {
+        display: block;
+        padding: 12px;
+        color: white;
+        background: #14213d;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: .3s;
+    }
+
+    .btn-producto:hover {
+        color: white;
+        background: #2563eb;
+    }
+
+    .sin-productos {
+        grid-column: 1 / -1;
+        padding: 50px 20px;
+        background: white;
+        border-radius: 15px;
+        text-align: center;
+        color: #64748b;
+    }
+
+    @media(max-width: 1000px) {
+        .productos-contenedor {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+    @media(max-width: 750px) {
+        .productos-contenedor {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media(max-width: 480px) {
+        .productos-contenedor {
+            grid-template-columns: 1fr;
+        }
+
+        .catalogo-encabezado h1 {
+            font-size: 29px;
+        }
+    }
 </style>
 {% endblock %}
 
-{% block contenido %}
+
+{% block content %}
+
 <section class="catalogo">
-    <h1>Calzado para hombre</h1>
-    <p class="intro">Encuentra tus tenis ideales para cada ocasión.</p>
+
+    <div class="catalogo-encabezado">
+        <span>COLECCIÓN NOVA SHOES</span>
+        <h1>Calzado para Hombre</h1>
+        <p>Encuentra tus tenis ideales para cada ocasión.</p>
+    </div>
 
     <div class="filtros">
         <a href="{{ url_for('inicio') }}">Todos los productos</a>
+        <a href="{{ url_for('hombre') }}" class="activo">Hombre</a>
         <a href="{{ url_for('mujer') }}">Mujer</a>
         <a href="{{ url_for('nino') }}">Niño</a>
     </div>
 
     <div class="productos-contenedor">
+
         {% for producto in productos %}
+
         <article class="producto-card">
+
             <div class="producto-imagen">
+
                 {% if producto.imagen %}
-                <img src="{{ url_for('static', filename='img/' + producto.imagen) }}" alt="{{ producto.nombre }}">
+                    <img
+                        src="{{ url_for('static', filename='img/' + producto.imagen) }}"
+                        alt="{{ producto.nombre }}"
+                    >
                 {% else %}
-                <p>Sin imagen disponible</p>
+                    <p>Sin imagen disponible</p>
                 {% endif %}
+
             </div>
+
             <div class="producto-info">
-                <p class="producto-marca">{{ producto.marca }}</p>
+
+                <p class="producto-marca">
+                    {{ producto.marca }}
+                </p>
+
                 <h3>{{ producto.nombre }}</h3>
-                <p>{{ producto.descripcion or '' }}</p>
-                <p class="producto-precio">${{ producto.precio }}</p>
-                <p>Stock: {{ producto.stock }}</p>
-                <a class="btn" href="{{ url_for('producto', id_producto=producto.id_producto) }}">Ver producto</a>
+
+                <p class="producto-descripcion">
+                    {{ producto.descripcion or 'Calzado disponible en Nova Shoes.' }}
+                </p>
+
+                <p class="producto-precio">
+                    ${{ "{:,.0f}".format(producto.precio) }}
+                </p>
+
+                <p class="producto-stock">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Disponibles: {{ producto.stock }}
+                </p>
+
+                <a
+                    class="btn-producto"
+                    href="{{ url_for('producto', id_producto=producto.id_producto) }}"
+                >
+                    Ver producto
+                </a>
+
             </div>
+
         </article>
+
         {% else %}
-        <p>No hay productos disponibles para hombre.</p>
+
+        <div class="sin-productos">
+            <h3>No hay zapatos disponibles</h3>
+            <p>Actualmente no tenemos productos para hombre con existencias.</p>
+        </div>
+
         {% endfor %}
+
     </div>
+
 </section>
+
 {% endblock %}

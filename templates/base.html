@@ -27,36 +27,46 @@
             </a>
 
             <!-- MENÚ DE NAVEGACIÓN -->
-            <nav class="menu">
+          <nav class="menu">
 
-                <a href="{{ url_for('inicio') }}">Inicio</a>
+    <a href="{{ url_for('inicio') }}">Inicio</a>
 
-                <a href="{{ url_for('hombre') }}">Hombre</a>
+    <a href="{{ url_for('hombre') }}">Hombre</a>
 
-                <a href="{{ url_for('mujer') }}">Mujer</a>
+    <a href="{{ url_for('mujer') }}">Mujer</a>
 
-                <a href="{{ url_for('nino') }}">Niño</a>
+    <a href="{{ url_for('nino') }}">Niño</a>
 
-                <a href="{{ url_for('marcas') }}">Marcas</a>
+    <a href="{{ url_for('marcas') }}">Marcas</a>
 
-            </nav>
+    {% if session.get('nombre') %}
+        <span class="saludo-usuario">
+            ¡Hola, {{ session.get('nombre') }}! 👋
+        </span>
+    {% endif %}
+
+</nav>
 
             <!-- ACCIONES -->
-            <div class="acciones-header">
+            
+<!-- ACCIONES -->
+<div class="acciones-header">
 
-                <button class="icono-header" aria-label="Buscar">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
+    <button class="icono-header boton-buscar" aria-label="Buscar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
 
-                <a href="#" class="icono-header" aria-label="Mi cuenta">
-                    <i class="fa-regular fa-user"></i>
-                </a>
+    <a href="{{ url_for('login') }}" class="icono-header boton-usuario" aria-label="Mi cuenta">
+        <i class="fa-regular fa-user"></i>
+    </a>
 
-                <a href="#" class="icono-header" aria-label="Carrito">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                </a>
+    <button class="icono-header boton-carrito" aria-label="Carrito">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="contador-carrito">0</span>
+    </button>
 
-            </div>
+</div>
+
 
         </div>
 

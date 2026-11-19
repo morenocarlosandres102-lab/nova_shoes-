@@ -4,20 +4,38 @@ from flask import (
 )
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 from decimal import Decimal
 from functools import wraps
+from dotenv import load_dotenv
 import os
-from werkzeug.utils import secure_filename
+import uuid
+
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = "nova_shoes_clave_sesion_2026"
 
-# Configuración para guardar imágenes
-app.config["UPLOAD_FOLDER"] = os.path.join(app.root_path, "static", "img")
+app.secret_key = os.environ.get("SECRET_KEY")
+
+if not app.secret_key:
+    raise RuntimeError("Falta configurar SECRET_KEY en el archivo .env")
+
+# Configuración de imágenes
+app.config["UPLOAD_FOLDER"] = os.path.join(
+    app.root_path, "static", "img"
+)
 app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024
+
 os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 
 EXTENSIONES_IMAGEN = {"png", "jpg", "jpeg", "webp", "gif"}
+
+# Seguridad de las sesiones
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+app.config["SESSION_COOKIE_SECURE"] = (
+    os.environ.get("COOKIE_SECURE", "False").lower() == "true"
+)
 
 
 # ==========================================
@@ -25,13 +43,15 @@ EXTENSIONES_IMAGEN = {"png", "jpg", "jpeg", "webp", "gif"}
 # ==========================================
 
 def conectar_db():
+    """Establece y devuelve una conexión con la base de datos MySQL."""
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="0811",
-        database="nova_shoes"
+        host=os.environ.get("DB_HOST", "localhost"),
+        user=os.environ.get("DB_USER", "root"),
+        password=os.environ.get("DB_PASSWORD", "0811"),
+        database=os.environ.get("DB_NAME", "nova_shoes"),
+        port=int(os.environ.get("DB_PORT", "3306")),
+        connection_timeout=10
     )
-
 
 # ==========================================
 # CONSULTAR PRODUCTOS

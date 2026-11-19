@@ -1,12 +1,27 @@
+
 document.addEventListener("DOMContentLoaded", () => {
 
+    // =========================
+    // CARRITO
+    // =========================
 
-
-    let carrito = [];
+    let carrito = JSON.parse(localStorage.getItem("carritoNova")) || [];
 
     const botonesCarrito = document.querySelectorAll(".boton-carrito-producto");
     const contadorCarrito = document.querySelector(".contador-carrito");
     const botonCarrito = document.querySelector(".boton-carrito");
+
+    function guardarCarrito() {
+        localStorage.setItem("carritoNova", JSON.stringify(carrito));
+    }
+
+    function actualizarContador() {
+        if (contadorCarrito) {
+            contadorCarrito.textContent = carrito.reduce(
+                (total, producto) => total + producto.cantidad, 0
+            );
+        }
+    }
 
     botonesCarrito.forEach((boton) => {
 
@@ -19,15 +34,21 @@ document.addEventListener("DOMContentLoaded", () => {
             const precio = tarjeta.querySelector(".producto-precio").textContent.trim();
             const id = boton.dataset.id;
 
-            const producto = {
-                id: id,
-                nombre: nombre,
-                marca: marca,
-                precio: precio
-            };
+            const existente = carrito.find(producto => producto.id == id);
 
-            carrito.push(producto);
+            if (existente) {
+                existente.cantidad++;
+            } else {
+                carrito.push({
+                    id: id,
+                    nombre: nombre,
+                    marca: marca,
+                    precio: precio,
+                    cantidad: 1
+                });
+            }
 
+            guardarCarrito();
             actualizarContador();
 
             boton.textContent = "Agregado ✓";
@@ -36,46 +57,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 boton.textContent = "Agregar al carrito";
             }, 1500);
 
-            console.log("Producto agregado:", producto);
+            console.log("Carrito actualizado:", carrito);
         });
 
     });
-
-
-    function actualizarContador() {
-
-        if (contadorCarrito) {
-            contadorCarrito.textContent = carrito.length;
-        }
-
-    }
-
-
 
     if (botonCarrito) {
 
         botonCarrito.addEventListener("click", () => {
 
             if (carrito.length === 0) {
-
                 alert("Tu carrito está vacío");
-
-            } else {
-
-                let mensaje = "Productos en tu carrito:\n\n";
-
-                carrito.forEach((producto, indice) => {
-
-                    mensaje += `${indice + 1}. ${producto.nombre} - ${producto.precio}\n`;
-
-                });
-
-                alert(mensaje);
+                return;
             }
 
+            let mensaje = "PRODUCTOS EN TU CARRITO\n\n";
+
+            carrito.forEach((producto) => {
+                mensaje += `${producto.nombre}\n`;
+                mensaje += `Cantidad: ${producto.cantidad}\n`;
+                mensaje += `Precio: ${producto.precio}\n\n`;
+            });
+
+            alert(mensaje);
         });
 
     }
+
+    actualizarContador();
 
 
     // =========================
@@ -90,12 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const busqueda = prompt("¿Qué producto estás buscando?");
 
-            if (!busqueda) {
-                return;
-            }
+            if (!busqueda) return;
 
             const productos = document.querySelectorAll(".producto-card");
-
             let encontrados = 0;
 
             productos.forEach((producto) => {
@@ -103,50 +109,48 @@ document.addEventListener("DOMContentLoaded", () => {
                 const texto = producto.textContent.toLowerCase();
 
                 if (texto.includes(busqueda.toLowerCase())) {
-
                     producto.style.display = "";
-
                     encontrados++;
-
                 } else {
-
                     producto.style.display = "none";
-
                 }
 
             });
 
             if (encontrados === 0) {
-
                 alert("No encontramos productos con ese nombre.");
-
             }
 
-            document.querySelector("#productos").scrollIntoView({
-                behavior: "smooth"
-            });
+            const seccion = document.querySelector("#productos");
+
+            if (seccion) {
+                seccion.scrollIntoView({ behavior: "smooth" });
+            }
 
         });
 
     }
 
 
-   
+    // =========================
+    // USUARIO
+    // =========================
 
     const botonUsuario = document.querySelector(".boton-usuario");
 
     if (botonUsuario) {
 
         botonUsuario.addEventListener("click", () => {
-
             alert("Próximamente podrás iniciar sesión en Nova Shoes.");
-
         });
 
     }
 
 
-    
+    // =========================
+    // BOTONES PRINCIPALES
+    // =========================
+
     const botonesComprar = document.querySelectorAll(".boton-principal");
 
     botonesComprar.forEach((boton) => {
@@ -160,11 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const seccion = document.querySelector(destino);
 
                 if (seccion) {
-
-                    seccion.scrollIntoView({
-                        behavior: "smooth"
-                    });
-
+                    seccion.scrollIntoView({ behavior: "smooth" });
                 }
 
             }
@@ -174,28 +174,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    
+    // =========================
+    // EFECTOS DE PRODUCTOS
+    // =========================
+
     const productos = document.querySelectorAll(".producto-card");
 
     productos.forEach((producto) => {
 
         producto.addEventListener("mouseenter", () => {
-
             producto.style.transform = "translateY(-5px)";
             producto.style.transition = "transform 0.3s ease";
-
         });
 
         producto.addEventListener("mouseleave", () => {
-
             producto.style.transform = "translateY(0)";
-
         });
 
     });
 
 
-    
+    // =========================
+    // LOGO
+    // =========================
 
     const logo = document.querySelector(".logo a");
 
@@ -213,7 +214,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
     }
-
 
     console.log("JavaScript de Nova Shoes funcionando");
 

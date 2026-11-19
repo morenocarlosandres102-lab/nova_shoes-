@@ -1,32 +1,130 @@
 
 {% extends "base.html" %}
 
-{% block titulo %}Marcas | Nova Shoes{% endblock %}
+{% block title %}Marcas | Nova Shoes{% endblock %}
 
-{% block estilos %}
+{% block extra_css %}
 <style>
-.marcas-pagina { padding: 70px 6%; text-align: center; }
-.marcas-pagina h1 { font-size: 36px; margin-bottom: 12px; }
-.marcas-pagina > p { color: #666; margin-bottom: 40px; }
-.marcas-grid { max-width: 1000px; margin: auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
-.marca-card { padding: 45px 15px; border: 1px solid #e5e5e5; background: #fafafa; transition: .2s; }
-.marca-card:hover { color: #1557b0; border-color: #1557b0; transform: translateY(-4px); }
-.marca-card h2 { font-size: 22px; }
-.marca-card p { margin-top: 12px; font-size: 13px; color: #666; }
-@media(max-width:700px) { .marcas-grid { grid-template-columns: repeat(2,1fr); } }
+.marcas-pagina {
+    padding: 70px 6%;
+    min-height: 70vh;
+    background: #f5f7fb;
+    text-align: center;
+}
+
+.marcas-pagina h1 {
+    color: #14213d;
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.marcas-pagina > p {
+    color: #64748b;
+    font-size: 16px;
+    margin-bottom: 45px;
+}
+
+.marcas-grid {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.marca-card {
+    min-height: 190px;
+    padding: 35px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 15px;
+    transition: .3s ease;
+    box-shadow: 0 5px 18px rgba(0,0,0,.04);
+}
+
+.marca-card:hover {
+    transform: translateY(-8px);
+    border-color: #2563eb;
+    box-shadow: 0 12px 25px rgba(37,99,235,.12);
+}
+
+.marca-icono {
+    font-size: 38px;
+    margin-bottom: 18px;
+    color: #2563eb;
+}
+
+.marca-card h2 {
+    color: #172033;
+    font-size: 23px;
+    margin-bottom: 10px;
+}
+
+.marca-card p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+@media(max-width: 900px) {
+    .marcas-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 500px) {
+    .marcas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .marcas-pagina h1 {
+        font-size: 29px;
+    }
+}
 </style>
 {% endblock %}
 
-{% block contenido %}
+{% block content %}
 <section class="marcas-pagina">
+
     <h1>Nuestras marcas</h1>
-    <p>Descubre las marcas disponibles en Nova Shoes.</p>
+
+    <p>
+        Descubre las mejores marcas de calzado disponibles en Nova Shoes.
+    </p>
 
     <div class="marcas-grid">
-        <a class="marca-card" href="{{ url_for('inicio') }}"><h2>Nike</h2><p>Ver catálogo</p></a>
-        <a class="marca-card" href="{{ url_for('inicio') }}"><h2>Adidas</h2><p>Ver catálogo</p></a>
-        <a class="marca-card" href="{{ url_for('inicio') }}"><h2>New Balance</h2><p>Ver catálogo</p></a>
-        <a class="marca-card" href="{{ url_for('inicio') }}"><h2>Puma</h2><p>Ver catálogo</p></a>
+
+        <a class="marca-card" href="{{ url_for('inicio') }}">
+            <i class="fa-solid fa-shoe-prints marca-icono"></i>
+            <h2>Nike</h2>
+            <p>Ver colección</p>
+        </a>
+
+        <a class="marca-card" href="{{ url_for('inicio') }}">
+            <i class="fa-solid fa-shoe-prints marca-icono"></i>
+            <h2>Adidas</h2>
+            <p>Ver colección</p>
+        </a>
+
+        <a class="marca-card" href="{{ url_for('inicio') }}">
+            <i class="fa-solid fa-shoe-prints marca-icono"></i>
+            <h2>New Balance</h2>
+            <p>Ver colección</p>
+        </a>
+
+        <a class="marca-card" href="{{ url_for('inicio') }}">
+            <i class="fa-solid fa-shoe-prints marca-icono"></i>
+            <h2>Puma</h2>
+            <p>Ver colección</p>
+        </a>
+
     </div>
+
 </section>
 {% endblock %}
