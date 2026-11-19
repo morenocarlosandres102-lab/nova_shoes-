@@ -11,6 +11,35 @@ from dotenv import load_dotenv
 import os
 import uuid
 
+from flask import (
+    Flask, render_template, request, redirect,
+    url_for, session, flash
+)
+import mysql.connector
+from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
+from decimal import Decimal
+from functools import wraps
+from dotenv import load_dotenv
+import os
+import uuid
+
+# Cargar variables de entorno
+load_dotenv()
+
+
+# CONEXIÓN A LA BASE DE DATOS
+def conectar_db():
+    return mysql.connector.connect(
+        host=os.environ.get("DB_HOST"),
+        port=int(os.environ.get("DB_PORT", "3306")),
+        user=os.environ.get("DB_USER"),
+        password=os.environ.get("DB_PASSWORD"),
+        database=os.environ.get("DB_NAME", "main"),
+        ssl_disabled=False,
+        ssl_ca=os.environ.get("DB_SSL_CA")
+    )
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -50,10 +79,8 @@ def conectar_db():
         port=int(os.environ.get("DB_PORT", "3306")),
         user=os.environ.get("DB_USER"),
         password=os.environ.get("DB_PASSWORD"),
-        database=os.environ.get("DB_NAME"),
-
+        database=os.environ.get("DB_NAME", "main"),
         connection_timeout=30,
-
         ssl_disabled=False
     )
 

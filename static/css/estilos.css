@@ -2087,16 +2087,16 @@ img {
     display: inline-block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    color: #dc2626 !important;
+    color: #2684dc !important;
     font-weight: 700;
     padding: 9px 12px;
-    border: 1px solid #dc2626;
+    border: 1px solid #2699dc;
     border-radius: 8px;
     text-decoration: none;
     white-space: nowrap;
 }
 
 .menu a.cerrar-sesion:hover {
-    background: #dc2626;
+    background: #2699dc;
     color: white !important;
 }
