@@ -2051,3 +2051,52 @@ img {
     align-items: center;
     justify-content: center;
 }
+/* =====================================
+   SALUDO Y CERRAR SESIÓN
+===================================== */
+
+.saludo-usuario {
+    color: #2563eb;
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.menu a.cerrar-sesion {
+    color: #dc2626;
+    font-weight: 700;
+    padding: 9px 13px;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.menu a.cerrar-sesion:hover {
+    color: white;
+    background: #dc2626;
+    border-color: #dc2626;
+}
+
+/* Ajuste para que quepan los enlaces */
+.menu {
+    gap: 18px;
+    flex-wrap: wrap;
+}
+/* BOTÓN CERRAR SESIÓN */
+.menu a.cerrar-sesion {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #dc2626 !important;
+    font-weight: 700;
+    padding: 9px 12px;
+    border: 1px solid #dc2626;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.menu a.cerrar-sesion:hover {
+    background: #dc2626;
+    color: white !important;
+}
