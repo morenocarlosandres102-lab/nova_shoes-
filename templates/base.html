@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,51 +28,65 @@
             </a>
 
             <!-- MENÚ DE NAVEGACIÓN -->
-          <nav class="menu">
+            <nav class="menu">
 
-    <a href="{{ url_for('inicio') }}">Inicio</a>
+                <a href="{{ url_for('inicio') }}">Inicio</a>
 
-    <a href="{{ url_for('hombre') }}">Hombre</a>
+                <a href="{{ url_for('hombre') }}">Hombre</a>
 
-    <a href="{{ url_for('mujer') }}">Mujer</a>
+                <a href="{{ url_for('mujer') }}">Mujer</a>
 
-    <a href="{{ url_for('nino') }}">Niño</a>
+                <a href="{{ url_for('nino') }}">Niño</a>
 
-    <a href="{{ url_for('marcas') }}">Marcas</a>
+                <a href="{{ url_for('marcas') }}">Marcas</a>
 
-    {% if session.get('nombre') %}
-        <span class="saludo-usuario">
-            ¡Hola, {{ session.get('nombre') }}! 👋
-        </span>
-    {% endif %}
+                {% if session.get('id_usuario') and session.get('rol') != 'admin' %}
 
-</nav>
+                    <span class="saludo-usuario">
+                        ¡Hola, {{ session.get('nombre') }}! 👋
+                    </span>
+
+                    <a href="{{ url_for('mi_cuenta') }}">Mi cuenta</a>
+
+                    <a href="{{ url_for('logout') }}" class="cerrar-sesion">
+                        Cerrar sesión
+                    </a>
+
+                {% elif not session.get('id_usuario') %}
+
+                    <a href="{{ url_for('login') }}">Iniciar sesión</a>
+
+                {% endif %}
+
+            </nav>
 
             <!-- ACCIONES -->
-            
-<!-- ACCIONES -->
-<div class="acciones-header">
+            <div class="acciones-header">
 
-    <button class="icono-header boton-buscar" aria-label="Buscar">
-        <i class="fa-solid fa-magnifying-glass"></i>
-    </button>
+                <button class="icono-header boton-buscar" aria-label="Buscar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
 
-    <a href="{{ url_for('login') }}" class="icono-header boton-usuario" aria-label="Mi cuenta">
-        <i class="fa-regular fa-user"></i>
-    </a>
+                {% if session.get('id_usuario') and session.get('rol') != 'admin' %}
+                    <a href="{{ url_for('mi_cuenta') }}" class="icono-header boton-usuario" aria-label="Mi cuenta">
+                        <i class="fa-regular fa-user"></i>
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="icono-header boton-usuario" aria-label="Iniciar sesión">
+                        <i class="fa-regular fa-user"></i>
+                    </a>
+                {% endif %}
 
-    <button class="icono-header boton-carrito" aria-label="Carrito">
-        <i class="fa-solid fa-bag-shopping"></i>
-        <span class="contador-carrito">0</span>
-    </button>
+                <button class="icono-header boton-carrito" aria-label="Carrito">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="contador-carrito">0</span>
+                </button>
 
-</div>
-
+            </div>
 
         </div>
 
     </header>
-
 
     <!-- CONTENIDO DE CADA PÁGINA -->
     <main>
@@ -81,7 +96,6 @@
         {% endblock %}
 
     </main>
-
 
     <!-- PIE DE PÁGINA -->
     <footer class="footer">
