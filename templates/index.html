@@ -59,13 +59,27 @@
                 <a href="{{ url_for('login_admin') }}" class="btn-admin">
                     <i class="fas fa-user-shield"></i> Administrador
                  </a>
+{% if session.get('id_usuario') and session.get('rol') != 'admin' %}
 
-                   {% if session.get('nombre') %}
     <span class="saludo-usuario">
         ¡Hola, {{ session.get('nombre') }}! 👋
     </span>
-{% endif %}
 
+    <a href="{{ url_for('mi_cuenta') }}">
+        Mi cuenta
+    </a>
+
+    <a href="{{ url_for('logout') }}" class="cerrar-sesion">
+        Cerrar sesión
+    </a>
+
+{% elif not session.get('id_usuario') %}
+
+    <a href="{{ url_for('login') }}">
+        Iniciar sesión
+    </a>
+
+{% endif %}
             </nav>
 
             <!-- ACCIONES -->
